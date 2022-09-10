@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>DET</title>
+		<meta charset="utf-8">
+		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
+
+	</head>
+	<body>
+    <h1>Device Engineering Tool</h1>
+	<div class="form">
+		<form id="start-form">
+			<div>
+				<label>Протокол</label>
+				<select name="protocol">
+					<option value="modbus">ModbusTCP</option>
+					<option value="bacnet">BACnetIP</option>
+				</select>
+			</div>
+			<div>
+				<button id="protocol-submit" type="button">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+    </div>
+	<div class="form">
+	    <form id="bacnet-form" action="/protocol/bacnet/whois" method="get">
+				<label>Тип запроса</label>
+				<select name="action-type">
+					<option value="who-is">who-is</option>
+					<option value="object-list">get object list</option>
+					<option value="read-property">read property</option>
+				</select>
+
+			<div>
+				<button id="bacnet-submit" type="button">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+	</div>
+    <div class="form">
+	    <form id="bacnet-object-list" action="/protocol/bacnet/gol" method="get">
+			<div>
+				<label>IP-адрес хоста</label>
+				<input type="text" name="host-ip" placeholder="Введите ip-адрес вашего хоста">
+			</div>
+			<div>
+				<label>IP-адрес девайса</label>
+				<input type="text" name="device-ip" placeholder="Введите ip адрес девайса">
+			</div>
+			<div>
+				<label>BAC Port</label>
+				<input type="number" name="port" placeholder="Введите номер порта">
+			</div>
+			<div>
+				<label>ID девайса</label>
+				<input type="number" name="instance" placeholder="Введите id девайса">
+			</div>
+
+			<div>
+				<button id="obj-list-submit" type="submit">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+	</div>
+    <div class="form">
+	    <form id="bacnet-read" action="/protocol/bacnet/read" method="get">
+			<div>
+				<label>IP-адрес хоста</label>
+				<input type="text" name="host-ip" placeholder="Введите ip-адрес вашего хоста">
+			</div>
+			<div>
+				<label>IP-адрес девайса</label>
+				<input type="text" name="device-ip" placeholder="Введите ip адрес девайса">
+			</div>
+			<div>
+				<label>BAC Port</label>
+				<input type="number" name="port" placeholder="Введите номер порта">
+			</div>
+			<div>
+				<label>Тип объекта</label>
+				<select name="object-type">
+					<option value="ai">analog input</option>
+					<option value="ao">analog output</option>
+					<option value="av">analog value</option>
+					<option value="bi">binary input</option>
+					<option value="bo">binary output</option>
+					<option value="bv">binary value</option>
+					<option value="msi">multistate input</option>
+					<option value="mso">multistate output</option>
+					<option value="msv">multistate value</option>
+				</select>
+			</div>
+			<div>
+				<label>ID-объекта</label>
+				<input type="number" name="instance" placeholder="Введите id объекта">
+			</div>
+			<div>
+				<button id="bacnet-read-submit" type="submit">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+	</div>
+	<div class="form">
+	    <form id="modbus-read" action="/protocol/modbus/read" method="get">
+			<div>
+				<label>IP-адрес девайса</label>
+				<input type="text" name="device-ip" placeholder="Введите ip адрес девайса">
+			</div>
+			<div>
+				<label>TCP порт</label>
+				<input type="number" name="port" placeholder="Введите номер tcp-порта ">
+			</div>
+			<div>
+				<label>Тип регистра</label>
+				<select name="object-type">
+					<option value="hr">holding registers</option>
+					<option value="ir">input registers</option>
+					<option value="co">coils</option>
+					<option value="di">discrete inputs</option>
+				</select>
+			</div>
+			<div>
+				<label>Адрес регистра</label>
+				<input type="number" name="instance" placeholder="Введите id объекта">
+			</div>
+			<div>
+				<label>Кол-во регистров для чтения</label>
+				<input type="number" name="quantity" placeholder="Введите кол-во регистров">
+			</div>
+			<div>
+				<button id="modbus-read-submit">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+	</div>
+	<h3>{{response}}</h3>
+	</body>
+<script src="{{ url_for('static', filename= 'js/test.js') }}"></script>
+</html>
