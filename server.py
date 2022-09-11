@@ -7,7 +7,7 @@ router = Router()
 
 @app.route('/')
 def enter():
-    return router.home()
+    return render_template('home.html', response='')
 
 
 @app.route('/protocol/modbus/read', methods=['GET'])

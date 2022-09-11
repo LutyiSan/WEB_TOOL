@@ -1,4 +1,5 @@
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
+from pymodbus.pdu import ExceptionResponse
 from loguru import logger
 from colorama import Fore, init
 
@@ -23,15 +24,21 @@ class TCPClient:
 
     #  @func_set_timeout(5)
     def read_hr(self, reg_address, quantity):
-
         try:
-            print(reg_address, quantity)
             result = self.tester.read_holding_registers(reg_address, quantity, unit=UNIT)
 
-            if isinstance(result.registers, list) and len(result.registers) == quantity:
-                return result.registers
-            else:
+            if isinstance(result, ExceptionResponse):
+              #  print(result)
                 return False
+            else:
+               # print(result.registers)
+                if result.registers:
+                    if isinstance(result.registers, list):
+                        return result.registers
+                    else:
+                        return False
+                else:
+                     return False
         except Exception as e:
             logger.exception(Fore.LIGHTRED_EX + "FAIL Read registers", e)
             return False
@@ -52,7 +59,8 @@ class TCPClient:
     def read_coils(self, reg_address, quantity):
         try:
             result = self.tester.read_coils(reg_address, quantity, unit=UNIT)
-            if isinstance(result.bits, list) and len(result.bits) == quantity:
+            print(result.bits)
+            if isinstance(result.bits, list):
                 return result.bits
             else:
                 return False
@@ -64,7 +72,8 @@ class TCPClient:
     def read_di(self, reg_address, quantity):
         try:
             result = self.tester.read_discrete_inputs(reg_address, quantity, unit=UNIT)
-            if isinstance(result.bits, list) and len(result.bits) == quantity:
+            print(result)
+            if isinstance(result.bits, list):
                 return result.bits
             else:
                 return False
@@ -73,7 +82,6 @@ class TCPClient:
             return False
 
     def read(self, reg_address, quantity, reg_type):
-        print(reg_address, quantity, reg_type)
         if self.connect():
             result = None
             if reg_type == 'hr':

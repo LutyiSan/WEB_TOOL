@@ -39,7 +39,7 @@
 		</form>
 	</div>
     <div class="form">
-	    <form id="bacnet-object-list" action="/protocol/bacnet/gol" method="get">
+	    <form id="bacnet-object-list">
 			<div>
 				<label>IP-адрес хоста</label>
 				<input type="text" name="host-ip" placeholder="Введите ip-адрес вашего хоста">
@@ -58,13 +58,13 @@
 			</div>
 
 			<div>
-				<button id="obj-list-submit" type="submit">Отправить</button>
+				<button id="obj-list-submit" type="button">Отправить</button>
 				<button type="reset" >Сбросить</button>
 			</div>
 		</form>
 	</div>
     <div class="form">
-	    <form id="bacnet-read" action="/protocol/bacnet/read" method="get">
+	    <form id="bacnet-read">
 			<div>
 				<label>IP-адрес хоста</label>
 				<input type="text" name="host-ip" placeholder="Введите ip-адрес вашего хоста">
@@ -96,13 +96,13 @@
 				<input type="number" name="instance" placeholder="Введите id объекта">
 			</div>
 			<div>
-				<button id="bacnet-read-submit" type="submit">Отправить</button>
+				<button id="bacnet-read-submit" type="button">Отправить</button>
 				<button type="reset" >Сбросить</button>
 			</div>
 		</form>
 	</div>
 	<div class="form">
-	    <form id="modbus-read" action="/protocol/modbus/read" method="get">
+	    <form id="modbus-read">
 			<div>
 				<label>IP-адрес девайса</label>
 				<input type="text" name="device-ip" placeholder="Введите ip адрес девайса">
@@ -129,12 +129,15 @@
 				<input type="number" name="quantity" placeholder="Введите кол-во регистров">
 			</div>
 			<div>
-				<button id="modbus-read-submit">Отправить</button>
-				<button type="reset" >Сбросить</button>
+				<button id="modbus-read-submit" type='button'>Отправить</button>
+				<button type="reset">Сбросить</button>
 			</div>
 		</form>
 	</div>
-	<h3>{{response}}</h3>
+	<div id="response-data">
+
+	</div>
+	<script src="{{ url_for('static', filename= 'js/test.js') }}"></script>
 	</body>
-<script src="{{ url_for('static', filename= 'js/test.js') }}"></script>
+
 </html>

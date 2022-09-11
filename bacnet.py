@@ -1,6 +1,7 @@
 from BAC0.scripts.Lite import Lite
-from colorama import Fore, init
+from colorama import Fore
 from validator import *
+
 
 def sign_sf(sf):
     if sf is not None and len(sf) == 4:
@@ -16,13 +17,11 @@ def sign_sf(sf):
     else:
         return [None, None, None, None]
 
+
 class BACnet:
     def __init__(self, host_ip="localhost", netmask='24', listen_port=47808):
-        print(host_ip, listen_port)
-        init(autoreset=True)
         self.single_point_list = []
-        self.object_dict = {"DEVICE_IP": [], 'DEVICE_ID': [], 'OBJECT_TYPE': [], 'OBJECT_ID': [], 'OBJECT_NAME': [],
-                            'DESCRIPTION': []}
+        self.object_dict = {'OBJECT_TYPE': [], 'OBJECT_ID': [], 'OBJECT_NAME': []}
         self.i_am_dict = {'DEVICE_IP': [], 'DEVICE_ID': [], "DEVICE_NAME": [], 'VENDOR': []}
         self.my_interface = host_ip
         self.netmask = netmask
@@ -30,7 +29,6 @@ class BACnet:
 
     def create_client(self):
         try:
-            print(self.my_interface, self.listen_port)
             self.bacnet_client = Lite(ip=self.my_interface, port=self.listen_port)
             print(Fore.LIGHTGREEN_EX + "BACnet Client READY")
             return True
@@ -113,37 +111,36 @@ class BACnet:
         return f'{obj_type} - {object_id} | present-value={self.single_point_list[0]} status-flags={sf} reliability={self.single_point_list[2]}'
 
     def get_object_list(self, device_ip, device_id):
+
         try:
             object_list = self.bacnet_client.read(
                 f'{device_ip}/{self.netmask} device {device_id} objectList')
-            print(object_list)
+
             objects_len = len(object_list)
             if objects_len > 0:
                 for i in object_list:
                     self.name = self.bacnet_client.read(
                         f'{device_ip}/{self.netmask} {i[0]} {i[1]} objectName')
-                    self.object_dict['DEVICE_IP'].append(device_ip)
-                    self.object_dict['DEVICE_ID'].append(device_id)
+
                     self.object_dict['OBJECT_TYPE'].append(i[0])
                     self.object_dict['OBJECT_ID'].append(i[1])
                     if isinstance(self.name, (str, list)) and len(self.name) > 0:
                         self.object_dict['OBJECT_NAME'].append(self.name)
                     else:
                         self.object_dict['OBJECT_NAME'].append('unknown')
-                    self.desk = self.bacnet_client.read(
-                        f'{device_ip}/{self.netmask} {i[0]} {i[1]} description')
-                    if isinstance(self.desk, (str, list)) and len(self.desk) > 0:
-                        self.object_dict['DESCRIPTION'].append(self.desk)
-                    else:
-                        self.object_dict['DESCRIPTION'].append('unknown')
-                   # print(Fore.LIGHTGREEN_EX + f'OBJECT_TYPE: {i[0]}  OBJECT_ID: {i[1]}  NAME: {self.name}'
-                                   #            f' DESCRIPTION: {self.desk}')
-           # print(f"{objects_len}  objects in device")
+            sent_data = dict.fromkeys(self.object_dict['OBJECT_NAME'])
+            idx = -1
+            while idx < (len(self.object_dict['OBJECT_NAME']) - 1):
+                idx += 1
+                sent_data[self.object_dict['OBJECT_NAME'][
+                    idx]] = f"{self.object_dict['OBJECT_TYPE'][idx]} {self.object_dict['OBJECT_ID'][idx]}"
+            return sent_data
         except Exception as e:
             print(Fore.LIGHTRED_EX + "Can't get object-list", e)
-        # self.bacnet_client.disconnect()
-        return self.object_dict
+            return False
+
 
     def disconnect(self):
         self.bacnet_client.disconnect()
         pass
+
