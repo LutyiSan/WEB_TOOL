@@ -26,6 +26,10 @@ function validateDigitInRange(digit, min, max){
 function validateModbus(){
   let ip = select('#modbus-read input[name="device-ip"]').value
   let port = select('#modbus-read input[name="port"]').value
+  if (port == ''){
+    port = '502'
+  }
+  console.log(port);
   let address = select('#modbus-read input[name="instance"]').value
   let quantity = select('#modbus-read input[name="quantity"]').value
   if (validateIP(ip) === true){
@@ -66,6 +70,9 @@ function validateBacnetRead(){
   let host_ip = select('#bacnet-read input[name="host-ip"]').value
   let device_ip = select('#bacnet-read input[name="device-ip"]').value
   let bport = select('#bacnet-read input[name="port"]').value
+  if (bport == ''){
+    bport = 47808
+  }
   let baddress = select('#bacnet-read input[name="instance"]').value
   console.log(host_ip, device_ip, bport, baddress)
   if (validateIP(host_ip) === true){
@@ -106,6 +113,9 @@ function validateBacnetGetList(){
   let host_ip = select('#bacnet-object-list input[name="host-ip"]').value
   let device_ip = select('#bacnet-object-list input[name="device-ip"]').value
   let bport = select('#bacnet-object-list input[name="port"]').value
+  if (bport == ''){
+    bport = 47808
+  }
   let baddress = select('#bacnet-object-list input[name="instance"]').value
   console.log(host_ip, device_ip, bport, baddress)
   if (validateIP(host_ip) === true){
@@ -190,8 +200,12 @@ select('#bacnet-submit').addEventListener("click", function(){
 select('#modbus-read-submit').addEventListener('click', function(){
   select('#response-data').innerHTML = '';
     if (validateModbus() === true){
+      let port = select('#modbus-read input[name="port"]').value
+      if (port == ''){
+      port = 502
+      }
     let params = 'modbus/read?device-ip='+select('#modbus-read input[name="device-ip"]').value+
-                  '&port='+select('#modbus-read input[name="port"]').value+
+                  '&port='+port+
                     '&object-type='+select('#modbus-read select[name="object-type"]').value+
                       '&instance='+select('#modbus-read input[name="instance"]').value+
                         '&quantity='+select('#modbus-read input[name="quantity"]').value
@@ -213,6 +227,10 @@ http_get.send();
 select('#bacnet-read-submit').addEventListener('click', function(){
   select('#response-data').innerHTML = '';
   if(validateBacnetRead() === true){
+    let port = select('#bacnet-read input[name="port"]').value
+      if (port == ''){
+      port = 47808
+      }
   let params = 'bacnet/read?host-ip='+select('#bacnet-read input[name="host-ip"]').value+
                 '&device-ip='+select('#bacnet-read input[name="device-ip"]').value+
                 '&port='+select('#bacnet-read input[name="port"]').value+
@@ -232,6 +250,10 @@ http_get.send();
 select('#obj-list-submit').addEventListener('click', function(){
   select('#response-data').innerHTML = '';
   if (validateBacnetGetList() === true){
+    let port = select('#bacnet-object-list input[name="port"]').value
+      if (port == ''){
+      port = 47808
+      }
   let params = 'bacnet/gol?host-ip='+select('#bacnet-object-list input[name="host-ip"]').value+
                 '&device-ip='+select('#bacnet-object-list input[name="device-ip"]').value+
                 '&port='+select('#bacnet-object-list input[name="port"]').value+

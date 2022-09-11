@@ -22,16 +22,12 @@ class TCPClient:
         except Exception as e:
             print("FAIL connecting", e)
 
-    #  @func_set_timeout(5)
     def read_hr(self, reg_address, quantity):
         try:
             result = self.tester.read_holding_registers(reg_address, quantity, unit=UNIT)
-
             if isinstance(result, ExceptionResponse):
-              #  print(result)
                 return False
             else:
-               # print(result.registers)
                 if result.registers:
                     if isinstance(result.registers, list):
                         return result.registers
@@ -43,16 +39,21 @@ class TCPClient:
             logger.exception(Fore.LIGHTRED_EX + "FAIL Read registers", e)
             return False
 
-    #  @func_set_timeout(5)
     def read_ir(self, reg_address, quantity):
         try:
             result = self.tester.read_input_registers(reg_address, quantity, unit=UNIT)
-            if isinstance(result.registers, list) and len(result.registers) == quantity:
-                return result.registers
-            else:
+            if isinstance(result, ExceptionResponse):
                 return False
+            else:
+                if result.registers:
+                    if isinstance(result.registers, list):
+                        return result.registers
+                    else:
+                        return False
+                else:
+                     return False
         except Exception as e:
-            print(Fore.LIGHTRED_EX + "FAIL Read registers", e)
+            logger.exception(Fore.LIGHTRED_EX + "FAIL Read registers", e)
             return False
 
     # @func_set_timeout(5)
