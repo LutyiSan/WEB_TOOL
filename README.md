@@ -1,1 +1,15 @@
-TOOL with WEB-interface
+# web-tools
+Данная программа создана для тестирования получения данных по протоколам modbus и BACnet. 
+Имеет встроеный web-интерфейс удобный для пользователя.
+# Установка
+1. Выполнить команду "sudo git lone https://github.com/LutyiSan/WEB-TOOL"
+# Запуск без Docker
+1. Находясь в папке WEB-TOOL, выполнить команду "sudo sh build.sh". !! Только при первом запуске !!
+2. Находясь в папке WEB-TOOL, выполнить команду "sudo sh start.sh"
+
+# Запуск с Docker
+1. Находясь в папке WEB_TOOL, выполнить команду "sudo docker-compose up".
+
+# Использование
+Ввести в строку браузера "yourhostIp:90"
+Пользоваться
