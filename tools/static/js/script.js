@@ -65,7 +65,6 @@ function validateModbus(){
   }
 }
 
-
 function validateBacnetRead(){
   let host_ip = select('#bacnet-read input[name="host-ip"]').value
   let device_ip = select('#bacnet-read input[name="device-ip"]').value
@@ -107,7 +106,6 @@ function validateBacnetRead(){
     return false
   }
 }
-
 
 function validateBacnetGetList(){
   let host_ip = select('#bacnet-object-list input[name="host-ip"]').value
@@ -151,15 +149,6 @@ function validateBacnetGetList(){
   }
 }
 
-
-
-
-
-
-
-
-
-
 select('#protocol-submit').addEventListener("click", function(){
     console.log(select('#start-form select').value)
     if (select('#start-form select').value == 'bacnet') {
@@ -194,8 +183,6 @@ select('#bacnet-submit').addEventListener("click", function(){
       }
     }
 )
-
-
 
 select('#modbus-read-submit').addEventListener('click', function(){
   select('#response-data').innerHTML = '';
