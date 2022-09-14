@@ -108,7 +108,8 @@ class BACnet:
             print(Fore.LIGHTRED_EX + "Can't read property", e)
             return str(e)
         sf = sign_sf(self.single_point_list[1])
-        return f'{obj_type} - {object_id} | present-value={self.single_point_list[0]} status-flags={sf} reliability={self.single_point_list[2]}'
+        return f'type: {obj_type}\ninstance: {object_id}\npresent-value: {self.single_point_list[0]}\n' \
+               f'status-flags: {sf}\nreliability: {self.single_point_list[2]}'
 
     def get_object_list(self, device_ip, device_id):
 

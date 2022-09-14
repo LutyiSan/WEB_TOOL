@@ -9,16 +9,17 @@ width: 100%;
 overflow: scroll;
 }
 
-#bacnet-form, #bacnet-object-list, #bacnet-read, #modbus-read{
+#bacnet-form, #bacnet-object-list, #bacnet-read,#bacnet-whois, #modbus-read{
     display: none;
 }
 
 
 h1 {
-    border: 2px #eee solid;
+    border: 2px #b6daff;
     color: #b6daff;
-    text-align: center;
+    text-align: left;
     padding: 10px;
+    margin-left: 5%;
 }
 
 ol,li{
@@ -27,15 +28,19 @@ color: #b6daff;
 }
 
 #response-data{
+    box-shadow: 2px 5px 53px -6px #8db7dd inset;
+    float: right;
     background-color: #37393cff;
     font-family: Arial;
     font-size: 18px;
     min-width: 20%;
-    float: right;
-    position: fixed;
-    top: 10%;
-    left: 40%;
-    overflow: auto;
+    max-width: 40%;
+    position: relative;
+    top: -600px;
+    margin-right: 20%;
+    margin-left: 20%;
+    
+    
     
 }
 
@@ -51,6 +56,7 @@ div {
 }
 
 form {
+    box-shadow: 2px 5px 53px -6px #8db7dd inset;
     padding: 20px;
     font-family: Arial;
     font-size: 13px;

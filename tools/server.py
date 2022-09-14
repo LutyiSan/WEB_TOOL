@@ -15,11 +15,6 @@ def read_registers():
     return router.route_controller('/protocol/modbus/read')
 
 
-@app.route('/protocol/bacnet/whois', methods=['GET'])
-def who_is():
-    return router.route_controller('/protocol/bacnet/whois')
-
-
 @app.route('/protocol/bacnet/gol', methods=['GET'])
 def get_obj_list():
     return router.route_controller('/protocol/bacnet/gol')
@@ -28,6 +23,11 @@ def get_obj_list():
 @app.route('/protocol/bacnet/read', methods=['GET'])
 def read_property():
     return router.route_controller('/protocol/bacnet/read')
+
+
+@app.route('/protocol/bacnet/whois', methods=['GET'])
+def whois():
+    return router.route_controller('/protocol/bacnet/whois')
 
 
 app.run(host='127.0.0.1', port=90)

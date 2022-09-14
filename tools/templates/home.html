@@ -1,12 +1,14 @@
 <!DOCTYPE html>
 <html>
 	<head>
-		<title>DET</title>
+		<title>LutyiTOOLS</title>
 		<meta charset="utf-8">
+		<link rel="icon" type="image/x-icon" href="{{ url_for('static', filename= 'favicon.svg') }}">
 		<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename= 'css/style.css') }}">
 
 	</head>
 	<body>
+		
     <h1>Device Engineering Tool</h1>
 	<div class="form">
 		<form id="start-form">
@@ -59,6 +61,22 @@
 
 			<div>
 				<button id="obj-list-submit" type="button">Отправить</button>
+				<button type="reset" >Сбросить</button>
+			</div>
+		</form>
+	</div>
+	    <div class="form">
+	    <form id="bacnet-whois">
+			<div>
+				<label>IP-адрес хоста</label>
+				<input type="text" name="host-ip" placeholder="Введите ip-адрес вашего хоста">
+			</div>
+			<div>
+				<label>BAC Port</label>
+				<input type="number" name="port" placeholder="Введите номер порта(default=47808)">
+			</div>
+			<div>
+				<button id="whois-submit" type="button">Отправить</button>
 				<button type="reset" >Сбросить</button>
 			</div>
 		</form>
@@ -134,10 +152,8 @@
 			</div>
 		</form>
 	</div>
-	<p id="response-data">
-
-	</p>
 	
+	<div id="response-data"></div>
 	</body>
 	<script src="{{ url_for('static', filename= 'js/script.js') }}"></script>
 </html>

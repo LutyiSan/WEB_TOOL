@@ -37,9 +37,6 @@ class Router:
             self.__quantity()
             self.ret_data = modbus_read(self.operate_dict)
             return self.ret_data
-        elif route == '/protocol/bacnet/whois':
-            self.__ip_port()
-            return render_template('home.html', response=self.ret_data)
         elif route == '/protocol/bacnet/gol':
             self.__ip_port()
             self.__id()
@@ -50,4 +47,8 @@ class Router:
             self.__obj_type()
             self.__id()
             self.ret_data = bacnet_read(self.operate_dict)
+            return self.ret_data
+        elif route == '/protocol/bacnet/whois':
+            self.__ip_port()
+            self.ret_data = bacnet_whois(self.operate_dict)
             return self.ret_data
