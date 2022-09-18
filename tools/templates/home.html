@@ -98,15 +98,15 @@
 			<div>
 				<label>Тип объекта</label>
 				<select name="object-type">
-					<option value="ai">analog input</option>
-					<option value="ao">analog output</option>
-					<option value="av">analog value</option>
-					<option value="bi">binary input</option>
-					<option value="bo">binary output</option>
-					<option value="bv">binary value</option>
-					<option value="msi">multistate input</option>
-					<option value="mso">multistate output</option>
-					<option value="msv">multistate value</option>
+					<option value="analogInput">analog input</option>
+					<option value="analogOutput">analog output</option>
+					<option value="analogValue">analog value</option>
+					<option value="binaryInput">binary input</option>
+					<option value="binaryOutput">binary output</option>
+					<option value="binaryValue">binary value</option>
+					<option value="multiStateInput">multistate input</option>
+					<option value="multiStateOutput">multistate output</option>
+					<option value="multiStateValue">multistate value</option>
 				</select>
 			</div>
 			<div>
@@ -145,6 +145,30 @@
 			<div>
 				<label>Кол-во регистров для чтения</label>
 				<input type="number" name="quantity" placeholder="Введите кол-во регистров">
+			</div>
+			<div>
+				<label>Тип переменной</label>
+				<select id="data-type" name="value-type">
+					<option value="binary16">binary</option>
+					<option value="uint16">uint16</option>
+					<option value="uint16r">uint16 inverse</option>
+					<option value="int16">int16</option>
+					<option value="int16r">int16 inverse</option>
+					<option value="float16">float16</option>
+					<option value="float16r">float16 inverse</option>
+					<option value="uint32">uint32</option>
+					<option value="uint32r">uint32 inverse</option>
+					<option value="int32">int32</option>
+					<option value="int32r">int32 inverse</option>
+					<option value="float32">float32</option>
+					<option value="float32r">float32 inverse</option>
+					<option value="uint64">uint64</option>
+					<option value="uint64r">uint64 inverse</option>
+					<option value="int64">int64</option>
+					<option value="int64r">int64 inverse</option>
+					<option value="float64">float64</option>
+					<option value="float64r">float64 inverse</option>
+				</select>
 			</div>
 			<div>
 				<button id="modbus-read-submit" type='button'>Отправить</button>

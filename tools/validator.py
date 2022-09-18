@@ -1,19 +1,25 @@
-def validate_ip(ip):
-    a = ip.split('.')
-    if len(a) != 4:
+def validate_ip(any_that_can_be_ip: any) -> bool:
+    if not isinstance(any_that_can_be_ip, str):
         return False
-    for x in a:
-        if not x.isdigit():
+    try:
+        parts = any_that_can_be_ip.split('.')
+        if len(parts) != 4:
             return False
-        i = int(x)
-        if i < 0 or i > 255:
-            return False
-    return True
+        for part in parts:
+            if not part.isdigit():
+                return False
+            number = int(part)
+            if number < 0 or number > 255:
+                return False
+        return True
+    except Exception as e:
+        print("FAIL validate IP", e)
+        return False
 
 
-def validate_digit(port, start, stop):
-    if port.isdigit():
-        if start <= int(port) <= stop:
+def validate_digit(value: any, min_value: int, max_value: int) -> bool:
+    if isinstance(value, (int, float)):
+        if min_value < value < max_value:
             return True
         else:
             return False
@@ -21,8 +27,9 @@ def validate_digit(port, start, stop):
         return False
 
 
-def validate_in_enum(enum, input_data):
-    if input_data in enum:
-        return True
-    else:
-        return False
+def validate_in_enum(enum: list[any], input_data: any) -> bool:
+    if isinstance(enum, list) and input_data is not None:
+        if input_data in enum:
+            return True
+        else:
+            return False

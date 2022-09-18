@@ -1,7 +1,4 @@
 
-
-
-
 body{
 background-color: #292929;
 height: 100%;
@@ -31,7 +28,7 @@ color: #b6daff;
     box-shadow: 2px 5px 53px -6px #8db7dd inset;
     float: right;
     background-color: #37393cff;
-    font-family: Arial;
+    font-family: Arial, serif;
     font-size: 18px;
     min-width: 20%;
     max-width: 40%;
@@ -39,15 +36,7 @@ color: #b6daff;
     top: -600px;
     margin-right: 20%;
     margin-left: 20%;
-    
-    
-    
 }
-
-
-
-
-
 
 div {
     clear: both;

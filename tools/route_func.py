@@ -1,6 +1,8 @@
-from flask import render_template, request
-from validator import *
-from operation import *
+from flask import request
+from tools.operation import *
+from tools.server_class import Reference
+
+ref = Reference()
 
 
 class Router:
@@ -29,26 +31,32 @@ class Router:
         quantity = self.request.args.get("quantity")
         self.operate_dict['quantity'] = quantity
 
+    def __value_type(self):
+        data_type = self.request.args.get("value-type")
+        print(data_type)
+        self.operate_dict['value-type'] = data_type
+
     def route_controller(self, route):
-        if route == '/protocol/modbus/read':
+        if route == ref.mb_read:
             self.__ip_port()
             self.__id()
             self.__obj_type()
             self.__quantity()
+            self.__value_type()
             self.ret_data = modbus_read(self.operate_dict)
             return self.ret_data
-        elif route == '/protocol/bacnet/gol':
+        elif route == ref.obj_list:
             self.__ip_port()
             self.__id()
             self.ret_data = bacnet_obj_list(self.operate_dict)
             return self.ret_data
-        elif route == '/protocol/bacnet/read':
+        elif route == ref.bc_read:
             self.__ip_port()
             self.__obj_type()
             self.__id()
             self.ret_data = bacnet_read(self.operate_dict)
             return self.ret_data
-        elif route == '/protocol/bacnet/whois':
+        elif route == ref.who_is:
             self.__ip_port()
             self.ret_data = bacnet_whois(self.operate_dict)
             return self.ret_data
