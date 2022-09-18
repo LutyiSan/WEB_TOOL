@@ -170,6 +170,7 @@ select('#protocol-submit').addEventListener("click", function(){
           select('#bacnet-form').style.display = "none";
           select('#bacnet-object-list').style.display = "none";
           select('#bacnet-read').style.display = "none";
+          select('#bacnet-whois').style.display = "none";
           select('#response-data').innerHTML = '';
 
       }
@@ -179,17 +180,22 @@ select('#protocol-submit').addEventListener("click", function(){
 select('#bacnet-submit').addEventListener("click", function(){
     if (select('#bacnet-form select').value === 'object-list') {
         select('#bacnet-object-list').style.display = "block";
+        select('#modbus-read').style.display = "none";
         select('#bacnet-read').style.display = "none";
+        select('#bacnet-whois').style.display = "none";
         select('#response-data').innerHTML = '';
     } else if (select('#bacnet-form select').value === 'read-property'){
           select('#bacnet-read').style.display = "block";
           select('#bacnet-object-list').style.display = "none";
+          select('#bacnet-whois').style.display = "none";
+          select('#modbus-read').style.display = "none";
           select('#bacnet-form #bacnet-submit').type = 'button';
           select('#response-data').innerHTML = '';
     } else{
         select('#bacnet-whois').style.display = "block";
         select('#bacnet-read').style.display = "none";
         select('#bacnet-object-list').style.display = "none";
+        select('#modbus-read').style.display = "none";
         select('#response-data').innerHTML = '';
       }
     }
