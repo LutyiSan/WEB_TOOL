@@ -1,6 +1,6 @@
 from flask import Flask, render_template
-from tools.route_func import *
-from tools.server_class import Reference, Methods
+from route_func import *
+from server_class import Reference, Methods
 
 app = Flask(__name__)
 router = Router()

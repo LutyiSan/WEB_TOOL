@@ -1,6 +1,6 @@
 from BAC0.scripts.Lite import Lite
 from loguru import logger
-from tools.validator import validate_ip, validate_digit, validate_in_enum
+from validator import validate_ip, validate_digit, validate_in_enum
 
 
 class BACnetClient:
@@ -203,3 +203,4 @@ class BACnetClient:
     rpm = BACnetClient.rpm_maker(points)
     cl.read_multiple('192.168.1.82', rpm)
 """
+

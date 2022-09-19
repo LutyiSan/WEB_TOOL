@@ -1,6 +1,6 @@
 from flask import request
-from tools.operation import *
-from tools.server_class import Reference
+from operation import *
+from server_class import Reference
 
 ref = Reference()
 

@@ -1,6 +1,6 @@
 from pymodbus.client.sync import ModbusTcpClient as ModbusClient
 from loguru import logger
-from tools.validator import validate_ip, validate_digit
+from validator import validate_ip, validate_digit
 
 
 class ModbusTCPClient:
