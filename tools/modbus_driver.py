@@ -52,8 +52,9 @@ class ModbusTCPClient:
             self.mb_logger.exception("Fail read registers", e)
             return self.__append_fault(quantity)
 
-    def read_bits(self, reg_number: int, quantity: int, reg_type: str) -> list:
+    def read_bits(self, reg_number: int, quantity: int, reg_type: str, unit: int) -> list:
         bits = []
+        self.unit = hex(int(unit))
         if not validate_digit(reg_number, self.min_address, self.max_address):
             self.mb_logger.error('Registers address incorrect!')
             return self.__append_fault(quantity)

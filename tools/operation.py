@@ -25,7 +25,7 @@ def modbus_read(operate_dict):
                     ret_string += f'address: {convert_data["address"][i]}  value: {convert_data["values"][i]}  |,'
                 return ret_string
         elif operate_dict['obj_type'] in ['di', 'co']:
-            res = client.read_bits(int(operate_dict['obj_id']), int(operate_dict['quantity']), operate_dict['obj_type'])
+            res = client.read_bits(int(operate_dict['obj_id']), int(operate_dict['quantity']), operate_dict['obj_type'],operate_dict['unit'])
             if None in res:
                 return 'Fail read registers!, '
             else:
