@@ -16,7 +16,7 @@ def modbus_read(operate_dict):
     if client.connection(operate_dict['device_ip'], int(operate_dict['port'])):
         if operate_dict['obj_type'] in ['hr', 'ir']:
             res = client.read_registers(int(operate_dict['obj_id']), operate_dict['quantity'],
-                                        operate_dict['obj_type'])
+                                        operate_dict['obj_type'], operate_dict['unit'])
             if None in res:
                 return 'Fail read registers!, '
             else:

@@ -20,6 +20,9 @@ class Router:
         port = self.request.args.get("port")
         self.operate_dict['port'] = port
 
+    def __unit(self):
+        unit = self.request.args.get("unit")
+        self.operate_dict['unit'] = unit
     def __id(self):
         instance = self.request.args.get("instance")
         self.operate_dict['obj_id'] = instance
@@ -33,12 +36,13 @@ class Router:
 
     def __value_type(self):
         data_type = self.request.args.get("value-type")
-        print(data_type)
+      #  print(data_type)
         self.operate_dict['value-type'] = data_type
 
     def route_controller(self, route):
         if route == ref.mb_read:
             self.__ip_port()
+            self.__unit()
             self.__id()
             self.__obj_type()
             self.__quantity()

@@ -18,6 +18,7 @@ function validateDigitInRange(digit, min, max){
 function validateModbus(){
     let ip = select('#modbus-read input[name="device-ip"]').value
     let port = select('#modbus-read input[name="port"]').value
+    let unit = select('#modbus-read input[name="unit"]').value
     if (port === ''){
         port = '502'
     }
@@ -209,7 +210,7 @@ select('#modbus-read-submit').addEventListener('click', function(){
           port = 502
         }
         let params = 'modbus/read?device-ip='+select('#modbus-read input[name="device-ip"]').value+
-                  '&port='+port+
+                  '&port='+select('#modbus-read input[name="port"]').value+'&unit='+select('#modbus-read input[name="unit"]').value+
                     '&object-type='+select('#modbus-read select[name="object-type"]').value+
                       '&instance='+select('#modbus-read input[name="instance"]').value+
                         '&quantity='+select('#modbus-read input[name="quantity"]').value+

@@ -1,4 +1,4 @@
-from pymodbus.client.sync import ModbusTcpClient as ModbusClient
+from pymodbus.client import ModbusTcpClient as ModbusClient
 from loguru import logger
 from validator import validate_ip, validate_digit
 
@@ -29,7 +29,9 @@ class ModbusTCPClient:
         except Exception as e:
             self.mb_logger.exception(e)
 
-    def read_registers(self, reg_number: int, quantity: int, reg_type: str) -> list:
+    def read_registers(self, reg_number: int, quantity: int, reg_type: str, unit: int) -> list:
+        self.unit = hex(int(unit))
+
         if not validate_digit(reg_number, self.min_address, self.max_address):
             self.mb_logger.error('Registers address incorrect!')
             return self.__append_fault(quantity)
@@ -38,6 +40,7 @@ class ModbusTCPClient:
             return self.__append_fault(quantity)
         try:
             if reg_type == 'hr':
+                print(self.unit, reg_number, quantity)
                 result = self.client.read_holding_registers(reg_number, quantity, unit=self.unit)
             else:
                 result = self.client.read_input_registers(reg_number, quantity, unit=self.unit)
@@ -62,7 +65,7 @@ class ModbusTCPClient:
                 result = self.client.read_coils(reg_number, quantity, unit=self.unit)
             else:
                 result = self.client.read_discrete_inputs(reg_number, quantity, unit=self.unit)
-            print(result)
+          #  print(result)
             if isinstance(result.bits, list) and len(result.bits) >= quantity:
                 for bit in range(0, quantity):
                     bits.append(result.bits[bit])
@@ -84,3 +87,4 @@ class ModbusTCPClient:
         for _ in range(0, count):
             self.fault.append(None)
         return self.fault
+
