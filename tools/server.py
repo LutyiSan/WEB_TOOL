@@ -33,4 +33,4 @@ def bc_whois():
     return router.route_controller(url.who_is)
 
 
-app.run(host='127.0.0.1', port=90, debug=True)
+app.run(host='0.0.0.0', port=90, debug=True)
