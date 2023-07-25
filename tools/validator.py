@@ -19,7 +19,7 @@ def validate_ip(any_that_can_be_ip: any) -> bool:
 
 def validate_digit(value: any, min_value: int, max_value: int) -> bool:
     if isinstance(value, (int, float)):
-        if min_value < value < max_value:
+        if min_value <= value <= max_value:
             return True
         else:
             return False
